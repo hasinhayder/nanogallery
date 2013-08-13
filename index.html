@@ -1,0 +1,265 @@
+<html>
+<head>
+	<title>Nanogallery with Vertical Preview</title>
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/jquery.transit.js"></script>
+
+	<style>
+	body{
+		margin:0px;
+		padding:0px;
+	}
+
+	/* Fullscreen Gallery Style */
+	.nanogallery{
+		position: absolute;
+		top:0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		background: #222;
+		overflow: hidden;
+	}
+
+	.nanogallery ul{
+		padding: 0px;
+		margin:0px;
+		position: relative;
+		list-style-type: none;
+		width: 10000px;
+	}
+
+	.nanogallery ul li{
+		list-style-type: none;
+		width: 100%;
+		height: 100%;
+		float: left;
+		overflow: hidden;
+	}
+
+	.nanogallery ul li img{
+		width: 100%;
+	}
+
+	/* Vertical Sidebar */
+	.nanogallery-vertical-preview{
+		width: 200px;
+		position: absolute;
+		top:0px;
+		right: 0px;
+		height: 100%;
+		/*transition:all 1s linear;*/
+	}
+
+	.nanogallery-vertical-preview .thumbs{
+		background-color: #222;
+		position: absolute;
+		margin: 0px;
+		height: 100%;
+		top:0px;
+		width: 170px;
+		right: 0px;
+		overflow-y:auto;
+	}
+
+	.nanogallery-vertical-preview ul{
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		width: 170px;
+	}
+
+	.nanogallery-vertical-preview ul li{
+		padding: 0px;
+		margin: 0px;
+		cursor: pointer;
+	}
+
+	.nanogallery-vertical-preview ul li img{
+		width: 100%;
+		float: left;
+		filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); 
+		filter: gray; 
+		-webkit-filter: grayscale(100%);
+	}
+
+	.nanogallery-vertical-preview ul li img:hover{
+		width: 100%;
+		float: left;
+		filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+		-webkit-filter: grayscale(0%);
+	}
+
+	.nanogallery-vertical-preview .switch{
+		position: fixed;
+		height: 60px;
+		line-height: 60px;
+		width: 30px;
+		text-align: center;
+		color: #eee;
+		font-size: 22px;
+		top:300px;
+		background: rgba(0,0,0,0.9);
+		cursor: pointer;
+		z-index: 1000;
+	}
+
+	.vcollapsed{
+		/*right: -170px;*/
+	}
+	</style>
+</head>
+<body>
+	<div class="nanogallery" data-thumb="vertical">
+		<ul>
+			<li>
+				<img src="http://placehold.it/2400x1300/3498db/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/27ae60/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/c0392b/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/8e44ad/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/e67e22/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/2c3e50/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/2980b9/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/7f8c8d/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/e67e22/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/16a085/eee" alt="" data-max = "height">
+			</li>
+			<li>
+				<img src="http://placehold.it/2400x1300/bdc3c7/222" alt="" data-max = "height">
+			</li>
+		</ul>
+	</div>
+	<div class="nanogallery-vertical-preview vcollapsed">
+		<div class="switch">
+			&laquo;
+		</div>
+		<div class="thumbs">
+			<ul>
+				<li>
+					<img src="http://placehold.it/200x133/3498db/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/27ae60/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/c0392b/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/8e44ad/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/e67e22/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/2c3e50/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/2980b9/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/7f8c8d/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/e67e22/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/16a085/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/bdc3c7/222" alt="" data-max = "height">
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	<script>
+	$(document).ready(function(){
+		var counter = 1;
+		var limit = $(".nanogallery ul li").length;
+		var w = $(".nanogallery").width();
+		var h = $(".nanogallery").height();
+		$(".nanogallery ul li").css({width:w,height:h});
+
+		$(".nanogallery ul li img").bind("click",function(){
+			console.log(counter);
+			if(counter>=limit){
+				$(".nanogallery ul").transition({
+					x:0
+				},1000*limit/2,"ease");
+				counter=1;
+			}else{
+				$(".nanogallery ul").transition({
+					x:(w*-1*counter)
+				},1000,"ease");
+				counter+=1;
+			}
+		});
+
+
+		$(".nanogallery-vertical-preview .switch").bind("click",function(){
+			if($(".nanogallery-vertical-preview").hasClass("vcollapsed")){
+				$(".nanogallery-vertical-preview").transition({
+					x:170
+				},500,"snap")
+				$(this).html("&laquo;");
+				$(".nanogallery-vertical-preview").removeClass("vcollapsed")
+			}else{
+				$(this).html("&raquo;");
+				$(".nanogallery-vertical-preview").transition({
+					x:0
+				},500,"snap");
+				$(".nanogallery-vertical-preview").addClass("vcollapsed")
+			}
+		});
+
+		$(".nanogallery-vertical-preview li").bind("click",function(){
+			var i = $(".nanogallery-vertical-preview li").index(this);
+			moveSlider(i);
+		});
+
+
+
+
+		//trigger collapse
+		$(".nanogallery-vertical-preview .switch").click();
+
+		$(window).bind("resize",function(){
+			w = $(".nanogallery").width();
+			h = $(".nanogallery").height();
+			$(".nanogallery ul li").css({width:w,height:h});
+			moveSlider(counter-1);
+		})
+
+		function moveSlider(i){
+			var time = Math.abs(counter-(i+1))/2;
+			if(time<1) time=1;
+			counter=i+1;
+			$(".nanogallery ul").transition({
+				x:(w*-1*i)
+			},1000*time,"ease");
+		}
+
+	});
+</script>
+
+</body>
+</html>
