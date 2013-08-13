@@ -27,16 +27,22 @@
 		margin:0px;
 		position: relative;
 		list-style-type: none;
-		width: 50000px;
+		min-width: 100%;
+		width: auto;
+		white-space:nowrap;
 	}
 
 	.nanogallery ul li{
 		list-style-type: none;
-		width: 100%;
 		height: 100%;
-		float: left;
+		display: inline-block;
 		overflow: hidden;
+		margin-left: -4px;
 	}
+	.nanogallery ul li:first-child{
+		margin: 0px;
+	}
+
 
 	.nanogallery ul li img{
 		width: 100%;
@@ -49,8 +55,6 @@
 		top:0px;
 		right: 0px;
 		height: 100%;
-
-		/*transition:all 1s linear;*/
 	}
 
 	.nanogallery-vertical-preview .thumbs{
@@ -112,8 +116,13 @@
 		line-height: 60px;
 	}
 
-	.vcollapsed{
-		/*right: -170px;*/
+	/* Horizontal Sidebar */
+	.nanogallery-vertical-preview{
+		width: 200px;
+		position: absolute;
+		top:0px;
+		right: 0px;
+		height: 100%;
 	}
 	</style>
 </head>
@@ -196,10 +205,52 @@
 				</li>
 			</ul>
 		</div>
-		
+	</div>
+	<div class="nanogallery-horizontal-preview">
+		<div class="switch">
+			<i class="icon-chevron-left"></i>
+		</div>
+		<div class="thumbs">
+			<ul>
+				<li>
+					<img src="http://placehold.it/200x133/3498db/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/27ae60/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/c0392b/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/8e44ad/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/e67e22/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/2c3e50/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/2980b9/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/7f8c8d/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/e67e22/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/16a085/eee" alt="" data-max = "height">
+				</li>
+				<li>
+					<img src="http://placehold.it/200x133/bdc3c7/222" alt="" data-max = "height">
+				</li>
+			</ul>
+		</div>
 	</div>
 	<script>
 	$(document).ready(function(){
+		/* Initialize */
 		var counter = 1;
 		var limit = $(".nanogallery ul li").length;
 		var w = $(".nanogallery").width();
@@ -221,7 +272,7 @@
 			}
 		});
 
-
+		//bind the click event for switch
 		$(".nanogallery-vertical-preview .switch").bind("click",function(){
 			if($(".nanogallery-vertical-preview").hasClass("vcollapsed")){
 				$(".nanogallery-vertical-preview").transition({
@@ -238,6 +289,7 @@
 			}
 		});
 
+		//click event for each thumbnail
 		$(".nanogallery-vertical-preview li").bind("click",function(){
 			var i = $(".nanogallery-vertical-preview li").index(this);
 			moveSlider(i);
@@ -256,6 +308,7 @@
 			moveSlider(counter-1);
 		})
 
+		//move the slider to the appropriate image
 		function moveSlider(i){
 			var time = Math.abs(counter-(i+1))/2;
 			if(time<1) time=1;
