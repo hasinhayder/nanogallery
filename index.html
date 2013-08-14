@@ -126,31 +126,34 @@
 	}
 
 	.nanogallery-horizontal-preview .switch{
-		margin: auto;
-		position: relative;
 		height: 30px;
 		width:60px;
 		text-align: center;
 		background-color: rgba(0,0,0,0.8);
 		color: #eee;
 		cursor: pointer;
+		position: fixed;
+		z-index: 2000;
+		left:48%;
 	}
 	.nanogallery-horizontal-preview .switch i{
-	line-height: 30px;
+		line-height: 30px;
 	}
-
-
-	.nanogallery-horizontal-preview{
+	.nanogallery-horizontal-preview .thumbs{
 		overflow: hidden;
-		overflow-x:scroll;
-	}
+		overflow-x: scroll;
 
+	}
 	.nanogallery-horizontal-preview .thumbs ul{
+		position: relative;
+		top:30px;
 		list-style-type: none;
 		white-space: nowrap;
 		width: auto;
 		padding: 0px;
 		margin: 0px;
+		min-width: 100%;
+		height: 145px;
 	}
 
 	.nanogallery-horizontal-preview .thumbs ul li{
@@ -183,7 +186,7 @@
 </head>
 <body>
 	<div class="fork">
-	<a href='http://github.com/hasinhayder/nanogallery' target='_blank'><img src="img/fork.png" alt="" ></a>
+		<a href='http://github.com/hasinhayder/nanogallery' target='_blank'><img src="img/fork.png" alt="" ></a>
 	</div>
 	<div class="nanogallery" data-thumb="vertical">
 		<ul>
