@@ -135,6 +135,7 @@
 		position: fixed;
 		z-index: 2000;
 		left:48%;
+		margin-top:-30px;
 	}
 	.nanogallery-horizontal-preview .switch i{
 		line-height: 30px;
@@ -146,7 +147,7 @@
 	}
 	.nanogallery-horizontal-preview .thumbs ul{
 		position: relative;
-		top:30px;
+		/*top:30px;*/
 		list-style-type: none;
 		white-space: nowrap;
 		width: auto;
@@ -361,7 +362,7 @@
 		$(".nanogallery-horizontal-preview .switch").bind("click",function(){
 			if($(".nanogallery-horizontal-preview").hasClass("vcollapsed")){
 				$(".nanogallery-horizontal-preview").transition({
-					y:130
+					y:160
 				},500,"snap")
 				$(this).html('<i class="icon-chevron-up"></i>');
 				$(".nanogallery-horizontal-preview").removeClass("vcollapsed")
