@@ -147,7 +147,7 @@
 	}
 	.nanogallery-horizontal-preview .thumbs{
 		overflow: hidden;
-		overflow-x: scroll;
+		overflow-x: auto;
 
 	}
 	.nanogallery-horizontal-preview .thumbs ul{
@@ -194,21 +194,58 @@
 		left: 0;
 		z-index: 2000;
 	}
+
+	/*Title Placeholder*/
+	.title{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		background-color: rgba(0,0,0,0.6);
+		text-align: center;
+		min-height: 40px;
+		width: 100%;
+		padding-top:20px;
+		color:#ccc;
+		font-size: 16px;
+		z-index: 1000;
+		display: none;
+	}
+
+	/**Scrollbar Hack for Webkit **/
+	::-webkit-scrollbar-track {
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	    -webkit-border-radius: 10px;
+	    border-radius: 10px;
+	}
+	 
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+	    -webkit-border-radius: 10px;
+	    border-radius: 10px;
+	    background: rgba(255,0,0,0.8); 
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	}
+	::-webkit-scrollbar-thumb:window-inactive {
+		background: rgba(255,0,0,0.4); 
+	}
 	</style>
 </head>
 <body>
+	<div class="title">
+		
+	</div>
 	<div class="fork">
 		<a href='http://github.com/hasinhayder/nanogallery' target='_blank'><img src="img/fork.png" alt="" ></a>
 	</div>
-	<div class="nanogallery" data-thumb="vertical">
+	<div class="nanogallery" data-thumb="vertical" data-show-title='true'>
 		<ul>
-			<li>
+			<li data-title="Climb leg rub face on everything give attitude nap all day for under the bed 1.">
 				<img src="http://placehold.it/2400x1400/3498db/eee" >
 			</li>
-			<li>
+			<li  data-title="Climb leg rub face on everything give attitude nap all day for under the bed 2.">
 				<img src="http://placehold.it/2400x1400/27ae60/eee" >
 			</li>
-			<li>
+			<li  data-title="Climb leg rub face on everything give attitude nap all day for under the bed 3.">
 				<img src="http://placehold.it/2400x1400/c0392b/eee" >
 			</li>
 			<li>
@@ -330,19 +367,30 @@
 		var h = $(".nanogallery").height();
 		$(".nanogallery ul li").css({width:w,height:h});
 
+		//initialize the title
+		if($(".nanogallery").data("show-title")==true){
+			$(".title").show();
+			$(".title").html($(".nanogallery ul li:first-child").data("title"));
+		}
+
 		$(".nanogallery ul li img").bind("click",function(){
-			console.log(counter);
+			var title = "";
 			if(counter>=limit){
 				$(".nanogallery ul").transition({
 					x:0
 				},1000*limit/2,"ease");
 				counter=1;
+				title = $(".nanogallery ul li:first-child").data("title");
 			}else{
 				$(".nanogallery ul").transition({
 					x:(w*-1*counter)
 				},1000,"ease");
 				counter+=1;
+				title = $(this).parent().next().data("title");
 			}
+			if(title==undefined) title = "&nbsp;";
+			$(".title").html(title);
+
 		});
 
 		//bind the click event for vertical switch
@@ -405,6 +453,10 @@
 
 		//move the slider to the appropriate image
 		function moveSlider(i){
+			var title = $(".nanogallery ul li:nth-child("+(i+1)+")").data("title");
+			if(title==undefined) title = "&nbsp;";
+			$(".title").html(title);
+			
 			var time = Math.abs(counter-(i+1))/2;
 			if(time<1) time=1;
 			counter=i+1;
