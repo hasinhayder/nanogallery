@@ -123,7 +123,7 @@
 
 	/* Horizontal Sidebar */
 	.nanogallery-horizontal-preview{
-		height: 160px;
+		/*height: 160px;*/
 		position: absolute;
 		bottom:0px;
 		left: 0px;
@@ -131,7 +131,7 @@
 	}
 
 	.nanogallery-horizontal-preview .switch{
-		height: 30px;
+		height: 40px;
 		width:60px;
 		text-align: center;
 		background-color: rgba(0,0,0,0.8);
@@ -140,10 +140,10 @@
 		position: fixed;
 		z-index: 2000;
 		left:48%;
-		margin-top:-30px;
+		margin-top:-40px;
 	}
 	.nanogallery-horizontal-preview .switch i{
-		line-height: 30px;
+		line-height: 35px;
 	}
 	.nanogallery-horizontal-preview .thumbs{
 		overflow: hidden;
@@ -213,17 +213,17 @@
 
 	/**Scrollbar Hack for Webkit **/
 	::-webkit-scrollbar-track {
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-	    -webkit-border-radius: 10px;
-	    border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
 	}
-	 
+
 	/* Handle */
 	::-webkit-scrollbar-thumb {
-	    -webkit-border-radius: 10px;
-	    border-radius: 10px;
-	    background: rgba(255,0,0,0.8); 
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		background: rgba(255,0,0,0.8); 
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 	}
 	::-webkit-scrollbar-thumb:window-inactive {
 		background: rgba(255,0,0,0.4); 
@@ -359,6 +359,13 @@
 		</div>
 	</div>
 	<script>
+
+	(function($) {
+		$.fn.hasScrollBar = function() {
+			return this.get(0) ? this.get(0).scrollWidth > this.innerWidth() : false;
+		}
+	})(jQuery);
+
 	$(document).ready(function(){
 		/* Initialize */
 		var counter = 1;
@@ -464,6 +471,17 @@
 				x:(w*-1*i)
 			},1000*time,"ease");
 		}
+
+		//adjust the horizontal switch height because of Webkit's intelligent scrollbar hide feature
+		if($(".nanogallery-horizontal-preview .thumbs").hasScrollBar()){
+			$(".nanogallery-horizontal-preview .switch").css({
+				height:"30px",
+				lineHeight:"30px",
+				marginTop:"-30px"
+			});
+		}
+
+
 
 	});
 </script>
