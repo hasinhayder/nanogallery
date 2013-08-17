@@ -374,6 +374,18 @@
 		var h = $(".nanogallery").height();
 		$(".nanogallery ul li").css({width:w,height:h});
 
+		//hook left and right arrow keypress
+		$(document).keydown(function(e){
+			if (e.keyCode == 37) { 
+				moveSlider(counter-2);
+				return false;
+			}
+			if (e.keyCode == 39) { 
+				moveSlider(counter);
+				return false;
+			}
+		});
+
 		//initialize the title
 		if($(".nanogallery").data("show-title")==true){
 			$(".title").show();
